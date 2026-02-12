@@ -1,13 +1,14 @@
 // Login.jsx
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgImage from "../../../assets/auth-bg.jpg";
 import { useState } from "react";
 import { login } from "../../../services/auth.service";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRememeber] = useState(false);
+  const [remember, setRemember] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,6 +19,7 @@ export default function Login() {
         localStorage.setItem("email", email);
         localStorage.setItem("password", password);
       }
+      navigate("/");
     }
     console.log(response);
   };
@@ -78,7 +80,7 @@ export default function Login() {
             <label className="flex items-center gap-2">
               <input type="checkbox" className="rounded"
                 value={remember}
-                onChange={(event) => { setRememeber(event.target.checked) }} />
+                onChange={(event) => { setRemember(event.target.checked) }} />
               Remember me
             </label>
             <Link to="/forgot" className="ml-1 text-blue-600 hover:underline">

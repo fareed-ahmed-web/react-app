@@ -1,20 +1,21 @@
-import  http  from "./http.service";
+import http from "./http.service";
 
-export const login = (email, password) => {
-    http.post("/auth/login", {
-        email,
-        password
+export const login = (workEmail, password) => {
+  return http
+    .post("http://localhost:8080/auth/login", {
+      workEmail,
+      password,
     })
-        .then(response => {
-            localStorage.setItem("token", response.data.token);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+    .then((response) => {
+     return response
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 export const logout = () => {
-    localStorage.removeItem("token");
+  localStorage.removeItem("token");
 };
 export const isAuthenticated = () => {
-    return localStorage.getItem("token") !== null;
+  return localStorage.getItem("token") !== null;
 };
